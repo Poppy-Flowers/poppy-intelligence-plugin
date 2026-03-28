@@ -1,0 +1,1262 @@
+[
+  {
+    "command": "lead lookup",
+    "description": "Full lead snapshot: CRM stage, proposal status, milestones, recent activity",
+    "domain": "lead-intelligence",
+    "args": [
+      {
+        "name": "identifier",
+        "type": "string",
+        "required": true,
+        "description": "Email address or deal ID"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw",
+      "prod"
+    ]
+  },
+  {
+    "command": "lead timeline",
+    "description": "Chronological event log: portal activity, emails, and comments for a deal",
+    "domain": "lead-intelligence",
+    "args": [
+      {
+        "name": "deal_id",
+        "type": "string",
+        "required": true,
+        "description": "Deal ID"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw",
+      "prod"
+    ]
+  },
+  {
+    "command": "leads no-phone",
+    "description": "Leads without a phone number, optionally filtered by source",
+    "domain": "lead-intelligence",
+    "args": [],
+    "flags": [
+      {
+        "name": "--source",
+        "type": "string",
+        "default": null,
+        "description": "Filter by lead source"
+      },
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30,
+        "description": "Lookback window in days"
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "leads stale",
+    "description": "Engaged leads with no activity for N days, ordered by budget",
+    "domain": "lead-intelligence",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 7,
+        "description": "Days of inactivity threshold"
+      },
+      {
+        "name": "--min-budget",
+        "type": "int",
+        "default": 0,
+        "description": "Minimum budget filter"
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw",
+      "prod"
+    ]
+  },
+  {
+    "command": "leads engaged",
+    "description": "Hot leads with recent portal activity",
+    "domain": "lead-intelligence",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 7,
+        "description": "Lookback window in days"
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw",
+      "prod"
+    ]
+  },
+  {
+    "command": "activecampaign overview",
+    "description": "Account inventory: contacts, deals, automations, campaigns, pipelines, stages",
+    "domain": "activecampaign",
+    "args": [],
+    "flags": [
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api"
+    ]
+  },
+  {
+    "command": "activecampaign contacts",
+    "description": "Search contacts by exact email or free text",
+    "domain": "activecampaign",
+    "args": [
+      {
+        "name": "query",
+        "type": "string",
+        "required": false,
+        "description": "Email or search text"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api"
+    ]
+  },
+  {
+    "command": "activecampaign contact",
+    "description": "Full contact record: profile, deal stage age, automation progress, campaign sends, custom fields, tracking logs",
+    "domain": "activecampaign",
+    "args": [
+      {
+        "name": "identifier",
+        "type": "string",
+        "required": true,
+        "description": "Contact ID or email"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api",
+      "neon-reporting"
+    ]
+  },
+  {
+    "command": "activecampaign deals",
+    "description": "Search deals by title with resolved pipeline/stage labels",
+    "domain": "activecampaign",
+    "args": [
+      {
+        "name": "query",
+        "type": "string",
+        "required": false,
+        "description": "Deal title search text"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api"
+    ]
+  },
+  {
+    "command": "activecampaign deal",
+    "description": "Deal detail: stage timeline with time in each stage, current stage age, tasks, activities, notes",
+    "domain": "activecampaign",
+    "args": [
+      {
+        "name": "deal_id",
+        "type": "string",
+        "required": true,
+        "description": "Deal ID"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api"
+    ]
+  },
+  {
+    "command": "activecampaign automations",
+    "description": "List or search automations",
+    "domain": "activecampaign",
+    "args": [
+      {
+        "name": "query",
+        "type": "string",
+        "required": false,
+        "description": "Automation name search text"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api"
+    ]
+  },
+  {
+    "command": "activecampaign automation",
+    "description": "Automation report: block counts, all campaigns in the automation, campaign engagement metrics, optional contact-specific entries",
+    "domain": "activecampaign",
+    "args": [
+      {
+        "name": "automation_id",
+        "type": "string",
+        "required": true,
+        "description": "Automation ID"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--contact",
+        "type": "string",
+        "default": null,
+        "description": "Contact ID or email for contact-specific view"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api",
+      "neon-reporting"
+    ]
+  },
+  {
+    "command": "activecampaign contact-automation",
+    "description": "Single automation-entry drill-down: entry/exit timestamps, automation log timeline, reached send steps, campaign performance",
+    "domain": "activecampaign",
+    "args": [
+      {
+        "name": "entry_id",
+        "type": "string",
+        "required": true,
+        "description": "Contact automation entry ID"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api",
+      "neon-reporting"
+    ]
+  },
+  {
+    "command": "activecampaign campaigns",
+    "description": "Recent campaigns with derived engagement metrics: open rate, click rate, click-to-open rate, bounces, unsubscribes",
+    "domain": "activecampaign",
+    "args": [
+      {
+        "name": "query",
+        "type": "string",
+        "required": false,
+        "description": "Campaign name search text"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api"
+    ]
+  },
+  {
+    "command": "activecampaign campaign",
+    "description": "Campaign detail with derived open/click rates",
+    "domain": "activecampaign",
+    "args": [
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "required": true,
+        "description": "Campaign ID"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "activecampaign-api"
+    ]
+  },
+  {
+    "command": "activecampaign ops summary",
+    "description": "Operational summary: open deals, stuck deals, open/overdue tasks, active automation entries, top pipelines/assignees/automations",
+    "domain": "activecampaign",
+    "args": [],
+    "flags": [
+      {
+        "name": "--pipeline",
+        "type": "string",
+        "default": null,
+        "description": "Filter by pipeline ID or name"
+      },
+      {
+        "name": "--assignee",
+        "type": "string",
+        "default": null,
+        "description": "Filter by assignee ID or name"
+      },
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 7,
+        "description": "Stuck deal threshold in days"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "neon-reporting"
+    ]
+  },
+  {
+    "command": "activecampaign ops stuck-deals",
+    "description": "Open deals whose current stage age exceeds the threshold, with task counts and assignees",
+    "domain": "activecampaign",
+    "args": [],
+    "flags": [
+      {
+        "name": "--pipeline",
+        "type": "string",
+        "default": null,
+        "description": "Filter by pipeline ID or name"
+      },
+      {
+        "name": "--stage",
+        "type": "string",
+        "default": null,
+        "description": "Filter by stage ID or name"
+      },
+      {
+        "name": "--assignee",
+        "type": "string",
+        "default": null,
+        "description": "Filter by assignee ID or name"
+      },
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 7,
+        "description": "Minimum stage age in days"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "neon-reporting"
+    ]
+  },
+  {
+    "command": "activecampaign ops tasks",
+    "description": "Task queue with status, due date, overdue age, assignee, deal context",
+    "domain": "activecampaign",
+    "args": [],
+    "flags": [
+      {
+        "name": "--status",
+        "type": "string",
+        "choices": [
+          "open",
+          "overdue",
+          "done",
+          "all"
+        ],
+        "default": "open"
+      },
+      {
+        "name": "--pipeline",
+        "type": "string",
+        "default": null,
+        "description": "Filter by pipeline ID or name"
+      },
+      {
+        "name": "--assignee",
+        "type": "string",
+        "default": null,
+        "description": "Filter by assignee ID or name"
+      },
+      {
+        "name": "--due-within",
+        "type": "int",
+        "default": null,
+        "description": "Only tasks due within N days"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "neon-reporting"
+    ]
+  },
+  {
+    "command": "activecampaign ops automation-entries",
+    "description": "Automation entry queue with contact, automation name, progress, campaign-hit counts, current deal/stage",
+    "domain": "activecampaign",
+    "args": [],
+    "flags": [
+      {
+        "name": "--automation",
+        "type": "string",
+        "default": null,
+        "description": "Filter by automation ID or name"
+      },
+      {
+        "name": "--status",
+        "type": "string",
+        "choices": [
+          "active",
+          "completed",
+          "all"
+        ],
+        "default": "active"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 10
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "neon-reporting"
+    ]
+  },
+  {
+    "command": "customer packet",
+    "description": "Canonical customer data packet: multi-source aggregation with provenance, quality scoring, and freshness",
+    "domain": "customer-packet",
+    "args": [
+      {
+        "name": "identifier",
+        "type": "string",
+        "required": true,
+        "description": "Event ID or deal ID"
+      }
+    ],
+    "flags": [
+      {
+        "name": "--id-type",
+        "type": "string",
+        "choices": [
+          "auto",
+          "event",
+          "deal"
+        ],
+        "default": "auto"
+      },
+      {
+        "name": "--use-case",
+        "type": "string",
+        "default": "enrichment",
+        "description": "Packet use case identifier"
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "json"
+        ],
+        "default": "json"
+      },
+      {
+        "name": "--debug-sources",
+        "type": "bool",
+        "default": false,
+        "description": "Print source provenance and quality summary to stderr"
+      }
+    ],
+    "output_schema": "schemas/customer-packet-v2.json",
+    "data_sources": [
+      "neon-voc",
+      "dw",
+      "prod",
+      "customer-api"
+    ]
+  },
+  {
+    "command": "google-ads overview",
+    "description": "Account health: freshness, spend, conversions, CPL, campaign count",
+    "domain": "google-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "google-ads campaigns",
+    "description": "Campaign performance: spend, clicks, conversions, CPL, bidding strategy",
+    "domain": "google-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "google-ads search-terms",
+    "description": "Search query report with 6-month validated waste classification",
+    "domain": "google-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--campaign",
+        "type": "string",
+        "default": null,
+        "description": "Filter by campaign ID or name"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 50
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "google-ads keywords",
+    "description": "Keyword performance with quality score, match type, bid",
+    "domain": "google-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--campaign",
+        "type": "string",
+        "default": null,
+        "description": "Filter by campaign ID or name"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 50
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "google-ads ads",
+    "description": "Ad performance with RSA headline/description parsing",
+    "domain": "google-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--campaign",
+        "type": "string",
+        "default": null,
+        "description": "Filter by campaign ID or name"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 50
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "google-ads correlate",
+    "description": "Detect keyword/campaign status changes and correlate with performance shifts",
+    "domain": "google-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 60
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "meta-ads overview",
+    "description": "Account health: freshness, spend, conversions, CPL, quality distribution",
+    "domain": "meta-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--action-type",
+        "type": "string",
+        "default": null,
+        "description": "Conversion action type override"
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "meta-ads campaigns",
+    "description": "Campaign performance: spend, clicks, conversions, CPL, frequency",
+    "domain": "meta-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--action-type",
+        "type": "string",
+        "default": null,
+        "description": "Conversion action type override"
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "meta-ads adsets",
+    "description": "Ad set performance with campaign context",
+    "domain": "meta-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--campaign",
+        "type": "string",
+        "default": null,
+        "description": "Filter by campaign ID or name"
+      },
+      {
+        "name": "--action-type",
+        "type": "string",
+        "default": null,
+        "description": "Conversion action type override"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "meta-ads ads",
+    "description": "Ad performance with creative details and quality rankings",
+    "domain": "meta-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--campaign",
+        "type": "string",
+        "default": null,
+        "description": "Filter by campaign ID or name"
+      },
+      {
+        "name": "--action-type",
+        "type": "string",
+        "default": null,
+        "description": "Conversion action type override"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "meta-ads platforms",
+    "description": "Performance breakdown by platform (Facebook vs Instagram) and placement",
+    "domain": "meta-ads",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "ga4 overview",
+    "description": "Site health dashboard: sessions, users, key events, channel breakdown, daily trend",
+    "domain": "ga4",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "ga4 events",
+    "description": "Event analysis with quiz funnel visualization and step-to-step conversion rates",
+    "domain": "ga4",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--event",
+        "type": "string",
+        "default": null,
+        "description": "Single event name for daily trend"
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "ga4 sources",
+    "description": "Traffic source analysis with LLM identification and key event rate",
+    "domain": "ga4",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--llm",
+        "type": "bool",
+        "default": false,
+        "description": "Show only LLM/AI referral traffic with monthly trend"
+      },
+      {
+        "name": "--channel",
+        "type": "bool",
+        "default": false,
+        "description": "Group by channel instead of source/medium"
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "ga4 pages",
+    "description": "Page performance: views, users, key events, engagement time",
+    "domain": "ga4",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--path",
+        "type": "string",
+        "default": null,
+        "description": "Filter by URL path prefix (e.g. /help, /weddings)"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "ga4 campaigns",
+    "description": "Campaign-level traffic from GA4 perspective, cross-referenceable with ad platform data",
+    "domain": "ga4",
+    "args": [],
+    "flags": [
+      {
+        "name": "--days",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--campaign",
+        "type": "string",
+        "default": null,
+        "description": "Filter by campaign name"
+      },
+      {
+        "name": "--limit",
+        "type": "int",
+        "default": 30
+      },
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "dw"
+    ]
+  },
+  {
+    "command": "health sources",
+    "description": "Quick connectivity check for VOC, DW, prod, and AC reporting backends",
+    "domain": "health",
+    "args": [],
+    "flags": [
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "table"
+      }
+    ],
+    "data_sources": [
+      "neon-voc",
+      "dw",
+      "prod",
+      "neon-reporting"
+    ]
+  },
+  {
+    "command": "commands",
+    "description": "Machine-readable catalog of all available CLI commands",
+    "domain": "meta",
+    "args": [],
+    "flags": [
+      {
+        "name": "--format",
+        "type": "string",
+        "choices": [
+          "table",
+          "json"
+        ],
+        "default": "json"
+      },
+      {
+        "name": "--domain",
+        "type": "string",
+        "default": null,
+        "description": "Filter by domain"
+      }
+    ],
+    "data_sources": []
+  }
+]

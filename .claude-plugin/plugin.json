@@ -1,0 +1,29 @@
+{
+  "name": "poppy-intelligence",
+  "description": "Poppy Intelligence — natural language access to lead intelligence, performance marketing (Google Ads, Meta Ads), CRM operations (ActiveCampaign), and web analytics (GA4) for the Poppy Flowers team.",
+  "version": "1.0.2",
+  "author": {
+    "name": "Poppy Flowers"
+  },
+  "repository": "https://github.com/Poppy-Flowers/poppy-plugin",
+  "keywords": [
+    "data-access",
+    "business-intelligence",
+    "google-ads",
+    "meta-ads",
+    "activecampaign",
+    "ga4",
+    "crm",
+    "lead-intelligence"
+  ],
+  "userConfig": {
+    "api_url": {
+      "description": "Poppy Gateway URL (e.g. https://poppy-gateway.onrender.com)",
+      "sensitive": false
+    },
+    "api_token": {
+      "description": "Poppy Gateway API token (get from your team lead)",
+      "sensitive": true
+    }
+  }
+}

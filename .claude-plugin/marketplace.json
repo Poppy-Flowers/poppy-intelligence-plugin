@@ -1,0 +1,16 @@
+{
+  "name": "poppy-intelligence",
+  "owner": {
+    "name": "Poppy Flowers"
+  },
+  "metadata": {
+    "description": "Poppy Intelligence OS plugin — business data access for the Poppy team"
+  },
+  "plugins": [
+    {
+      "name": "poppy-intelligence",
+      "source": "./",
+      "description": "Poppy Intelligence — natural language access to lead intelligence, performance marketing, CRM, and web analytics"
+    }
+  ]
+}
