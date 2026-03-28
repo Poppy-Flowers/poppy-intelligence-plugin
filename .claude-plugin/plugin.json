@@ -1,7 +1,7 @@
 {
-  "name": "Poppy-Intelligence",
+  "name": "poppy-intelligence",
   "description": "Poppy Intelligence — natural language access to lead intelligence, performance marketing, CRM, and web analytics for the Poppy Flowers team.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": {
     "name": "Poppy Flowers"
   }

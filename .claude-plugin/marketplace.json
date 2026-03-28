@@ -8,7 +8,7 @@
   },
   "plugins": [
     {
-      "name": "Poppy-Intelligence",
+      "name": "poppy-intelligence",
       "source": "./",
       "description": "Poppy Intelligence — natural language access to lead intelligence, performance marketing, CRM, and web analytics"
     }
