@@ -1,8 +1,25 @@
 {
   "name": "poppy-intelligence",
   "description": "Poppy Intelligence — natural language access to lead intelligence, performance marketing, CRM, and web analytics for the Poppy Flowers team.",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "author": {
     "name": "Poppy Flowers"
+  },
+  "repository": "https://github.com/Poppy-Flowers/poppy-intelligence-plugin",
+  "keywords": [
+    "data-access",
+    "business-intelligence",
+    "google-ads",
+    "meta-ads",
+    "activecampaign",
+    "ga4",
+    "crm",
+    "lead-intelligence"
+  ],
+  "userConfig": {
+    "api_token": {
+      "description": "Poppy Intelligence API token (get from your team lead)",
+      "sensitive": true
+    }
   }
 }

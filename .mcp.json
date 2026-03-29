@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "poppy-data": {
+      "type": "http",
+      "url": "https://poppy-gateway.onrender.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_token}"
+      }
+    }
+  }
+}
